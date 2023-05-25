@@ -4,7 +4,6 @@ import com.microprac.productservice.service.ProductService;
 import lombok.Data;
 
 @Data
-
 public class ProductServiceException extends RuntimeException{
 
     private String statusCode;

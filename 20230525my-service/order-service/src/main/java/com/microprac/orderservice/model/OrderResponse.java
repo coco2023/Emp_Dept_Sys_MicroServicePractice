@@ -7,7 +7,6 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 
 public class OrderResponse {

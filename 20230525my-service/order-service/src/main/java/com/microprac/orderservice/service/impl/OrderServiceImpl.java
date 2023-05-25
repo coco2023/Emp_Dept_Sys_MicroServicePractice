@@ -1,6 +1,7 @@
 package com.microprac.orderservice.service.impl;
 
 import com.microprac.orderservice.entity.Order;
+import com.microprac.orderservice.exception.OrderServiceException;
 import com.microprac.orderservice.model.OrderRequest;
 import com.microprac.orderservice.model.OrderResponse;
 import com.microprac.orderservice.repository.OrderRepository;
@@ -45,7 +46,21 @@ public class OrderServiceImpl implements OrderService {
         // payment service -> check the payment service -> payments -> success -> complete, else cancelled
 
 
-//        return order.getOrderId();
+        return orderResponse;
+    }
+
+    @Override
+    public OrderResponse getOrderById(Long orderId) {
+
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new OrderServiceException(
+                        "orderId - " + orderId + " does not exist! ",
+                        "ORDER_NOT_FOUND"
+                ));
+
+        OrderResponse orderResponse = new OrderResponse();
+        copyProperties(order, orderResponse);
+
         return orderResponse;
     }
 }

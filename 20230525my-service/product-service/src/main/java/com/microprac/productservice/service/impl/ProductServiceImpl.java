@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 //                .get()
 //                .orElseThrow(() -> new RuntimeException("Product does not exist"));
                 .orElseThrow(() -> new ProductServiceException(
-                        "productId: " + productId + " does not exist!",
+                        "productId - " + productId + " does not exist!",
                         "PRODUCT_NOT_FOUND"));
         ProductResponse productResponse = new ProductResponse();
         copyProperties(product, productResponse);                       // static import
