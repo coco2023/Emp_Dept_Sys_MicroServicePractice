@@ -1,6 +1,7 @@
 package com.microprac.orderservice.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.time.Instant;
 @Table(
         name = "orders"
 )
+@Builder
 public class Order {
 
     @Id
@@ -22,12 +24,12 @@ public class Order {
 
     private Long productId;
 
-    private Long quantity;
-
     private Long amount;
 
     private String orderStatus;
 
     private Instant orderDate;
+
+    private Long quantity;
 
 }

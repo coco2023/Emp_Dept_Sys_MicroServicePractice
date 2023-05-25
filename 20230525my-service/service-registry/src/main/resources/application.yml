@@ -6,7 +6,6 @@ spring:
     name: SERVICE_REGISTRY
 
 eureka:
-  clien:
   client:
     register-with-eureka: false
     fetch-registry: false
