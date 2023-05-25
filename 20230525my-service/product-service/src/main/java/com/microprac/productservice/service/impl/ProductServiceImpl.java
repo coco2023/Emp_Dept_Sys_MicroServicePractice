@@ -7,7 +7,6 @@ import com.microprac.productservice.model.ProductResponse;
 import com.microprac.productservice.repository.ProductRepository;
 import com.microprac.productservice.service.ProductService;
 import lombok.extern.log4j.Log4j2;
-//import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 //                .get()
 //                .orElseThrow(() -> new RuntimeException("Product does not exist"));
                 .orElseThrow(() -> new ProductServiceException(
-                        "+ productId: " + productId + " does not exist!",
+                        "productId: " + productId + " does not exist!",
                         "PRODUCT_NOT_FOUND"));
         ProductResponse productResponse = new ProductResponse();
         copyProperties(product, productResponse);                       // static import
