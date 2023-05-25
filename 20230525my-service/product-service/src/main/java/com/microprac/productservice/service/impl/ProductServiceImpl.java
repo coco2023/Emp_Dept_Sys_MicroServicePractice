@@ -1,6 +1,7 @@
 package com.microprac.productservice.service.impl;
 
 import com.microprac.productservice.entity.Product;
+import com.microprac.productservice.exception.ProductServiceException;
 import com.microprac.productservice.model.ProductRequest;
 import com.microprac.productservice.model.ProductResponse;
 import com.microprac.productservice.repository.ProductRepository;
@@ -24,8 +25,8 @@ public class ProductServiceImpl implements ProductService {
         log.info("adding products...");
 
         Product product = Product.builder()
-                .productName(productRequest.getName())
-                .quantity(productRequest.getQuality())
+                .productName(productRequest.getProductName())
+                .quantity(productRequest.getQuantity())
                 .price(productRequest.getPrice())
                 .build();
 
@@ -45,10 +46,12 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse getProductById(Long productId) {
         Product product = productRepository.findById(productId)
 //                .get()
-                .orElseThrow(() -> new RuntimeException("Product does not exist"));
-
+//                .orElseThrow(() -> new RuntimeException("Product does not exist"));
+                .orElseThrow(() -> new ProductServiceException(
+                        "+ productId: " + productId + " does not exist!",
+                        "PRODUCT_NOT_FOUND"));
         ProductResponse productResponse = new ProductResponse();
-        copyProperties(product, productResponse);                       // static imprt
+        copyProperties(product, productResponse);                       // static import
 
         return productResponse;
     }

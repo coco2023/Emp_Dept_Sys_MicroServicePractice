@@ -9,13 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductResponse {
-    private Long productId;
 
-    private String productName;
+public class ErrorResponse {
 
-    private Long price;
+    private String errorMessage;
 
-    private Long quantity;
+    private String errorCode;
 
 }
