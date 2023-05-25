@@ -5,5 +5,6 @@ import com.microprac.productservice.model.ProductResponse;
 
 public interface ProductService {
 
-    public Long addProduct(ProductRequest productRequest);
+    public ProductResponse addProduct(ProductRequest productRequest);
+    public ProductResponse getProductById(Long productId);
 }
