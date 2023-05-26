@@ -52,6 +52,33 @@ public class ProductServiceImpl implements ProductService {
         ProductResponse productResponse = new ProductResponse();
         copyProperties(product, productResponse);                       // static import
 
+        log.info("***product: {}", productResponse.toString());
         return productResponse;
+    }
+
+    @Override
+    public void reduceQuantity(Long productId, long reduceQuantity) {
+        log.info("reduce quantity {} for id: {}", productId, reduceQuantity);
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ProductServiceException("Product does not exist by id: " +
+                        productId, "PRODUCT_NOT_FOUND"));
+
+        log.info("old product: {}" + product.toString());
+
+        if( product.getQuantity() < reduceQuantity ) {
+            throw new ProductServiceException("product does not have sufficient quantity",
+                    "INSUFFICIENT_QUANTITY");
+        }
+
+        product.setQuantity(product.getQuantity() - reduceQuantity);
+
+        productRepository.save(product);
+
+        ProductResponse productResponse = new ProductResponse();
+        copyProperties(product, productResponse);
+
+        log.info("new product: {}" + product.toString());
+        log.info("new productResponse: {}" + productResponse.toString());
     }
 }

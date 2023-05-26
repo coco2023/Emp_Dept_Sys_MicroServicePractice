@@ -21,6 +21,7 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping("/placeOrder")
+    // http://localhost:9002/api/v1/orders/placeOrder
     public ResponseEntity<OrderResponse> placeOrder(@RequestBody OrderRequest orderRequest){
 
         var orderResponse = orderService.placeOrder(orderRequest);

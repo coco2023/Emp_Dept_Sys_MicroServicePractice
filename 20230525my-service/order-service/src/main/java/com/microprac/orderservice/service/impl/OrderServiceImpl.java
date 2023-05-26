@@ -2,6 +2,7 @@ package com.microprac.orderservice.service.impl;
 
 import com.microprac.orderservice.entity.Order;
 import com.microprac.orderservice.exception.OrderServiceException;
+import com.microprac.orderservice.external.ProductService;
 import com.microprac.orderservice.model.OrderRequest;
 import com.microprac.orderservice.model.OrderResponse;
 import com.microprac.orderservice.repository.OrderRepository;
@@ -20,13 +21,17 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private ProductService productService;
+
     @Override
     public OrderResponse placeOrder(OrderRequest orderRequest) {
         // order entity -> save the data with the status order created
         Order order = Order.builder()
                 .productId(orderRequest.getProductId())
                 .amount(orderRequest.getAmount())
-                .orderStatus(orderRequest.getOrderStatus())
+                .orderStatus("CREATED")
+//                .orderStatus(orderRequest.getOrderStatus())
 //                .orderDate(orderRequest.getOrderDate())
                 .orderDate(new Date().toInstant())
                 .quantity(orderRequest.getQuantity())
@@ -39,8 +44,8 @@ public class OrderServiceImpl implements OrderService {
         copyProperties(order, orderResponse);
 
         // product service -> block product(reduce the quantity)
-
-
+        productService.reduceQuantity(orderRequest.getProductId(), orderRequest.getQuantity());
+        log.info("product quantity has been changed!");
 
 
         // payment service -> check the payment service -> payments -> success -> complete, else cancelled
