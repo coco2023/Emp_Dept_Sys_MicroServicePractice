@@ -2,27 +2,20 @@ package com.microprac.orderservice.model;
 
 import lombok.*;
 
-import java.time.Instant;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
+@ToString
 
-public class OrderRequest {
+public class PaymentRequest {
 
     private Long orderId;
 
-    private Long productId;
-
-    private Long quantity;
-
     private Long amount;
 
-    private String orderStatus;
-
-    private Instant orderDate;
+    private String referenceNumber;
 
     private PaymentMode paymentMode;
+
 }

@@ -1,5 +1,6 @@
 package com.microprac.orderservice.entity;
 
+import com.microprac.orderservice.model.PaymentMode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,5 +32,7 @@ public class Order {
     private Instant orderDate;
 
     private Long quantity;
+
+    private PaymentMode paymentMode;
 
 }

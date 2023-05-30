@@ -1,5 +1,6 @@
 package com.microprac.paymentservice.entity;
 
+import com.microprac.paymentservice.model.PaymentMode;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class TransactionDetail {
 
     private Long orderId;
 
-    private String PaymentMode;
+    private PaymentMode paymentMode;
 
     private String referenceNumber;
 
