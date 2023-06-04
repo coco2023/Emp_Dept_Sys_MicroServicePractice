@@ -28,7 +28,7 @@ public class CartItemServiceImpl implements CartItemService {
         var cartItem = new CartItem()
                 .setSkuId(skuId)
                 .setCount(1000)
-                .setIsChecked(true);
+                .setIsChecked(false);
 
         log.info("cartKey:" + cartKey + " cartItem: " + cartItem);
 
@@ -51,6 +51,24 @@ public class CartItemServiceImpl implements CartItemService {
         );
 
         return cartItemList;
+    }
+
+    @Override
+    public List<CartItem> getSelectedItem(String cartKey) {
+        List<CartItem> cartItemSelectedList = strRedisTemp.boundHashOps(cartKey).values()
+                .stream()
+                .map(String::valueOf)
+                .map(json -> JSON.parseObject(json, CartItem.class))
+                .filter(CartItem::getIsChecked)
+                .collect(Collectors.toList());
+
+        return cartItemSelectedList;
+    }
+
+    @Override
+    public void deleteBySkuId(Long skuId, String cartKey) {
+        strRedisTemp.boundHashOps(cartKey).delete(skuId.toString());
+        log.info("Delete Succesfully!");
     }
 
 }

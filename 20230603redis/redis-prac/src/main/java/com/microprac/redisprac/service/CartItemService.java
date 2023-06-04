@@ -9,4 +9,8 @@ public interface CartItemService {
     void save(CartItemDTO cartItemDTO, String cartKey);
 
     List<CartItem> list(String cartKey);
+
+    List<CartItem> getSelectedItem(String cartKey);
+
+    void deleteBySkuId(Long skuId, String cartKey);
 }

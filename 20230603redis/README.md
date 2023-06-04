@@ -74,3 +74,43 @@ Redis provides a rich set of commands to operate on hashes. Some commonly used c
 # install Redis on Windows\
 
 https://redis.io/docs/getting-started/installation/install-redis-on-windows/ 
+
+
+# include >2 param in url in springboot controller
+
+Using Path Variables:
+You can include multiple path variables in the URL by defining them within curly braces `{}` in the URL pattern. Each path variable should have a corresponding method parameter in the controller method.
+
+Example:
+```
+@GetMapping("/users/{userId}/orders/{orderId}")
+public ResponseEntity<Order> getOrder(
+        @PathVariable("userId") Long userId,
+        @PathVariable("orderId") Long orderId) {
+    // ...
+}
+```
+
+In the above example, the URL pattern `/users/{userId}/orders/{orderId}` includes two path variables: userId and orderId. These path variables are extracted using @PathVariable annotations and are mapped to the method parameters userId and orderId respectively.
+
+The URL for accessing this controller method would be something like: `/users/123/orders/456`, where `123` represents the `userId` and `456` represents the `orderId`.
+
+Using Query Parameters:
+You can include multiple query parameters in the URL by appending them to the URL with the format `?param1=value1&param2=value2`. Each query parameter should have a corresponding method parameter in the controller method.
+
+Example:
+
+```
+@GetMapping("/users/orders")
+public ResponseEntity<Order> getOrder(
+        @RequestParam("userId") Long userId,
+        @RequestParam("orderId") Long orderId) {
+    // ...
+}
+
+```
+
+In the above example, the URL pattern `/users/orders` includes no path variables. Instead, the parameters `userId` and `orderId` are specified as query parameters. These query parameters are extracted using `@RequestParam` annotations and are mapped to the method parameters `userId` and `orderId` respectively.
+
+The URL for accessing this controller method would be something like: `/users/orders?userId=123&orderId=456`.
+
