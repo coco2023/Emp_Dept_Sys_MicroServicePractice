@@ -1,25 +1,4 @@
 
-# V03
-
-POST: http://localhost:9992/register
-> {
-"username":"BOSS",
-"password":"123",
-"nickname": "cai",
-"role": "ADMIN"
-}
-<hr>
-
-POST: http://localhost:9992/login
-
-> {
-"username":"user7",
-"password":"123",
-"role": "USER"
-}
-
-
-# v02
 
 The `th:action` attribute is a Thymeleaf attribute that specifies the action URL for the form. In this case, `@{/logout}` is used to generate the URL for the logout action.
 

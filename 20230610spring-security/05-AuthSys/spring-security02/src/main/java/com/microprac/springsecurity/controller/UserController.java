@@ -1,5 +1,6 @@
 package com.microprac.springsecurity.controller;
 
+import com.microprac.springsecurity.bean.WebResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -9,20 +10,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
-@Controller
+@RestController
 @Log4j2
 
 public class UserController {
 
+//    @GetMapping("/user")
+//    public String user(@AuthenticationPrincipal Principal principal, Model model){
+//
+//        log.info("principal: " + principal);
+//        log.info("model: " + model);
+//
+//        model.addAttribute("username", principal.getName());
+//
+//        return "user/user";
+//    }
+
     @GetMapping("/user")
-    public String user(@AuthenticationPrincipal Principal principal, Model model){
-
-        log.info("principal: " + principal);
-        log.info("model: " + model);
-
-        model.addAttribute("username", principal.getName());
-
-        return "user/user";
+    public WebResponse user(@AuthenticationPrincipal Principal principal){
+        return WebResponse.success(principal.getName());
     }
+
+    @GetMapping("/admin")
+    public WebResponse admin(@AuthenticationPrincipal Principal principal){
+        return WebResponse.success(principal.getName());
+    }
+
 
 }
