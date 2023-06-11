@@ -1,0 +1,11 @@
+#server:
+#  port: 9001
+#
+#auth0:
+#  audience: {yourApiIdentifier}
+#spring:
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: https://localhost:9001/
