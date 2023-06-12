@@ -10,21 +10,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @AllArgsConstructor
 
 public class HomeController {
 
-//    @GetMapping({"/", "/index", "/home"})
-//    public String root(){
-//        return "index";
-//    }
-//
-//    @GetMapping("/login")
-//    public String login(){
-//        return "login";
-//    }
+    @GetMapping({"/", "/index", "/home"})
+    public ModelAndView root(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+    @GetMapping("/login")
+    public ModelAndView login(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
 
     @Autowired
     private UserService userService;

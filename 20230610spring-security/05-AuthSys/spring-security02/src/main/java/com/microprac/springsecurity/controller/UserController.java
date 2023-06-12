@@ -28,7 +28,9 @@ public class UserController {
 
     @GetMapping("/user")
     public WebResponse user(@AuthenticationPrincipal Principal principal){
-        return WebResponse.success(principal.getName());
+        WebResponse response = WebResponse.success(principal.getName());
+        log.info("login Success! response" + response + " Message: " + response.getMessage());
+        return response;
     }
 
     @GetMapping("/admin")
