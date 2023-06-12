@@ -37,18 +37,18 @@ public class CustomJSONLoginFilter extends AbstractAuthenticationProcessingFilte
     
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
+        JSONObject requestBody = getRequestBody(httpServletRequest);
 
-        // here is receiving the JSON post request
-//        JSONObject requestBody = getRequestBody(httpServletRequest);
-//
-//        String username = requestBody.getString("username");
-//        String password = requestBody.getString("password");
-//        String role = requestBody.getString("role");
+        // here is receiving the JSON post request from PostMan
+        String username = requestBody.getString("username");
+        String password = requestBody.getString("password");
+        String role = requestBody.getString("role");
 
-        // here is to receive the form request
-        String username = httpServletRequest.getParameter("username");
-        String password = httpServletRequest.getParameter("password");
-        String role = httpServletRequest.getParameter("role");
+//        // here is to receive the form request
+//        String username = httpServletRequest.getParameter("username");
+//        String password = httpServletRequest.getParameter("password");
+//        String role = httpServletRequest.getParameter("role");
+
 
         validateUsernameAndPassword(username, password);
 
@@ -57,7 +57,6 @@ public class CustomJSONLoginFilter extends AbstractAuthenticationProcessingFilte
         simpleGrantedAuthorities.add(new SimpleGrantedAuthority(role));
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password, simpleGrantedAuthorities);
         log.info("token: " + token.toString());
-
         return token;
     }
 
@@ -68,8 +67,8 @@ public class CustomJSONLoginFilter extends AbstractAuthenticationProcessingFilte
      * @throws AuthenticationException
      */
     private void validateUsernameAndPassword(String username, String password) throws AuthenticationException {
-        //TODO: get "user not exist" ERROR here when using PostMan to login
         UserDO userDO = userService.getByUsername(username);
+        //TODO: get "user not exist" ERROR here when using PostMan to login
         if (userDO == null) {
             throw new RuntimeException("user not exist");
         }
@@ -90,8 +89,8 @@ public class CustomJSONLoginFilter extends AbstractAuthenticationProcessingFilte
             InputStream inputStream = request.getInputStream();
             byte[] bs = new byte[StreamUtils.BUFFER_SIZE];
 
-            int len = inputStream.read(bs);
-            while (len != -1) {
+            int len;
+            while ((len = inputStream.read(bs)) != -1) {
                 stringBuilder.append(new String(bs, 0, len));
             }
             return JSON.parseObject(stringBuilder.toString());

@@ -8,6 +8,14 @@ POST: http://localhost:9992/register
 "nickname": "cai",
 "role": "ADMIN"
 }
+> 
+> {
+"username":"user13",
+"password":"123",
+"nickname": "user13",
+"role": "USER"
+}
+
 <hr>
 
 POST: http://localhost:9992/login
@@ -17,6 +25,23 @@ POST: http://localhost:9992/login
 "password":"123",
 "role": "USER"
 }
+> 
+> {
+"username":"BOSS",
+"password":"123",
+"role": "ADMIN"
+}
+
+get user
+> http://localhost:9992/user
+
+get admin
+> http://localhost:9992/admin
+
+logout
+> http://localhost:9991/logout
+
+Please check the `handler ... ` for handler classes.
 
 
 # v02

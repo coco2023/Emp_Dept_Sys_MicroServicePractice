@@ -17,19 +17,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class HomeController {
 
-    @GetMapping({"/", "/index", "/home"})
-    public ModelAndView root(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
-        return modelAndView;
-    }
-
-    @GetMapping("/login")
-    public ModelAndView login(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
-        return modelAndView;
-    }
+//    @GetMapping({"/", "/index", "/home"})
+//    public ModelAndView root(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("index");
+//        return modelAndView;
+//    }
+//
+//    @GetMapping("/login")
+//    public ModelAndView login(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("login");
+//        return modelAndView;
+//    }
 
     @Autowired
     private UserService userService;
