@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -26,5 +27,10 @@ public class UserRole extends AbstractAuditBase implements Serializable {
     @ManyToOne
     @JoinColumn
     private Role role;
+
+    public UserRole(User user, Role role) {
+        this.user = user;
+        this.role = role;
+    }
 
 }

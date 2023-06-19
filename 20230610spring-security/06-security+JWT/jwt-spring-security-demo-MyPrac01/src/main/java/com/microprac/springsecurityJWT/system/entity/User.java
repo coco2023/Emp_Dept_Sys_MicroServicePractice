@@ -1,6 +1,7 @@
 package com.microprac.springsecurityJWT.system.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.microprac.springsecurityJWT.system.model.UserRepresentation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -54,5 +55,12 @@ public class User {
         );
 
         return authorities;
+    }
+
+    public UserRepresentation toUserRepresentation() {
+        return UserRepresentation.builder()
+                .fullName(getFullName())
+                .userName(getUserName())
+                .build();
     }
 }
