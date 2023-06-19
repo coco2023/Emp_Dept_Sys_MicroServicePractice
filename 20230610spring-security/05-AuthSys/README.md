@@ -1,0 +1,1 @@
+`spring-security03` is a simple version of `spring-security02` with the simplest realization of frontEnd
